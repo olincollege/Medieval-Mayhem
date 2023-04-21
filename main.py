@@ -2,7 +2,7 @@ import pygame
 import sys
 import os
 from player import Player
-
+from scroll import scroll
 
 worldx = 960
 worldy = 720
@@ -15,8 +15,8 @@ BLACK = (23, 23, 23)
 WHITE = (254, 254, 254)
 ALPHA = (0, 255, 0)
 
-
-backdrop = pygame.image.load(os.path.join("background.PNG"))
+background = "background.PNG"
+backdrop = pygame.image.load(scroll(background))
 clock = pygame.time.Clock()
 pygame.init()
 backdropbox = world.get_rect()
