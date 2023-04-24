@@ -2,6 +2,8 @@ import pygame
 import sys
 import os
 import math
+import time
+import random
 
 """
 Variables
@@ -13,6 +15,7 @@ fps = 40
 ani = 10000
 world = pygame.display.set_mode([worldx, worldy])
 pi = 3.14
+obstacle_list = pygame.sprite.Group()
 
 BLUE = (25, 25, 200)
 BLACK = (23, 23, 23)
@@ -45,6 +48,7 @@ class Player(pygame.sprite.Sprite):
             self.images.append(img)
             self.image = self.images[0]
             self.rect = self.image.get_rect()
+        self.current_image = 0
 
     def control(self, x, y, z):
         """
@@ -56,8 +60,9 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
         """
-        Update sprite position
+        Update sprite position and image
         """
+        # Update sprite position
         self.rect.x = self.rect.x + self.movex
         self.rect.y = self.rect.y + self.movey
 
@@ -71,6 +76,35 @@ class Player(pygame.sprite.Sprite):
             self.rect.y += abs(self.movez)
             self.movez = 0
 
+    def update_image(self):
+        # Update sprite image
+        self.current_image += 1
+        if self.current_image >= len(self.images):
+            self.current_image = 0
+        self.image = self.images[self.current_image]
+
+
+class castle_obstacle(pygame.sprite.Sprite):
+    def __init__(self, x, y, width, height):
+        super().__init__()
+        self.image = pygame.Surface([width, height])
+        self.image.fill(0)
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        self.velocity = 10  # change this value to control the speed of the obstacle
+
+    def update(self):
+        self.rect.x -= self.velocity
+
+    def add_obstacle(self):
+        width = random.randint(100, 150)
+        height = random.randint(100, 500)
+        x = worldx + width
+        y = worldy - height
+        obstacle = castle_obstacle(x, y, width, height)
+        obstacle_list.add(obstacle)
+
 
 """
 Setup
@@ -83,7 +117,7 @@ backdropbox = world.get_rect()
 main = True
 
 player = Player()  # spawn player
-player.rect.x = 0  # go to x
+player.rect.x = 50  # go to x
 player.rect.y = 0  # go to y
 player_list = pygame.sprite.Group()
 player_list.add(player)
@@ -93,17 +127,17 @@ steps = 10
 Main Loop
 """
 
-"""
-Main Loop
-"""
-
 # Load the background image and get its dimensions
 background = pygame.image.load(os.path.join("images", "background.PNG")).convert()
 bg_width, bg_height = background.get_size()
 
+obstacle = castle_obstacle(0, 0, 100, 100)
 # Initialize the x position of the background to 0
 bg_x = 0
-while main:
+frame_count = 0
+done = False
+while not done:
+    # Create a new castle_obstacle every 200 frames
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -121,14 +155,19 @@ while main:
                     main = False
             if event.key == pygame.K_UP or event.key == ord("w"):
                 player.control(0, -steps, 5)
+                player.update_image()
             if event.key == pygame.K_DOWN or event.key == ord("s"):
                 player.control(0, steps, 5)
+                player.update_image()
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_UP or event.key == ord("w"):
                 player.control(0, steps, 0)
+                player.update_image()
+
             if event.key == pygame.K_DOWN or event.key == ord("s"):
                 player.control(0, -steps, 0)
+                player.update_image()
 
     # Move the background image
     bg_x -= steps
@@ -149,7 +188,23 @@ while main:
     elif player.rect.bottom > worldy:
         player.rect.bottom = worldy
 
+        # Create a new castle_obstacle every 200 frames
+    frame_count += 1
+    if frame_count == 90:
+        frame_count = 0
+        obstacle.add_obstacle()
+
     player.update()
     player_list.draw(world)
+
+    obstacle_list.update()
+    # Draw the obstacles
+    obstacle_list.draw(world)
+
+    if pygame.sprite.spritecollide(player, obstacle_list, False):
+        done = True
+
     pygame.display.flip()
     clock.tick(fps)
+
+pygame.quit
