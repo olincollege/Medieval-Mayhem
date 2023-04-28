@@ -16,3 +16,6 @@ class Background:
 
     def __init__(self):
         pass
+
+    # # Create draw background method
+    # def draw_background(self):
