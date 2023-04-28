@@ -4,12 +4,6 @@ import os
 import background as Background
 
 
-import pygame
-import random
-import os
-import background as Background
-
-
 class Castle(pygame.sprite.Sprite):
     obstacle_list = pygame.sprite.Group()
 
@@ -40,3 +34,9 @@ class Castle(pygame.sprite.Sprite):
         y = worldy - height
         obstacle = Castle(x, y, width, height)
         obstacle_list.add(obstacle)
+
+
+# class Arrows(pygame.sprite.Sprite):
+#     def __init__(self, x, y, width, height):
+#         super().__init__
+#         arrow_image = pygame.image.load(os.path.join)

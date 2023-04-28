@@ -1,6 +1,8 @@
+import random
 import pygame
 from player import Player as Pl
-from obstacle import castle_obstacle as Co
+from obstacle import Castle as Co
+from obstacle import Arrows
 from background import Background as Bg
 from controller import Controller
 
@@ -9,9 +11,11 @@ clock = pygame.time.Clock()
 pygame.init()
 main = True
 obstacle = Co(0, 0, 100, 100)
+arrows = Arrows()
 
 bg_x = 0
 frame_count = 0
+arrows_frame_count = 0
 player_done = False
 
 player = Pl()  # spawn player
@@ -42,11 +46,16 @@ while not player_done:
 
     # Check if player is out of bounds and adjust position if necessary
     player.check_bounds(player, Bg.worldx, Bg.worldy)
-    # Create a new castle_obstacle every 200 frames
+    # Create a new Castle instance every 90 frames
     frame_count += 1
     if frame_count == 90:
         frame_count = 0
         obstacle.add_obstacle(Bg.worldx, Bg.worldy, Co.obstacle_list)
+    
+    # Create a new Arrows instance every 80 frames
+    if arrows_frame_count == 80:
+        arrows_frame_count = 0
+        arrows.add_arrows()
 
     player.update()
     Pl.player_list.draw(Bg.world)

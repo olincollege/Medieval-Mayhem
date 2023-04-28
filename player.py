@@ -11,6 +11,9 @@ class Player(pygame.sprite.Sprite):
     player_list = pygame.sprite.Group()
 
     def __init__(self):
+        """
+        Initialize an instance of the dragon sprite
+        """
         pygame.sprite.Sprite.__init__(self)
         self.movex = 0
         self.movey = 0
