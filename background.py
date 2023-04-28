@@ -3,14 +3,14 @@ import pygame
 
 
 class Background:
-    worldx = 960
-    worldy = 720
-    fps = 40
+    frame_width = 1200
+    frame_height = 825
+    frames_per_second = 40
     ani = 10000
-    world = pygame.display.set_mode([worldx, worldy])
+    world = pygame.display.set_mode([frame_width, frame_height])
     pi = 3.14
     background_image = pygame.image.load(
-        os.path.join("images", "background.PNG")
+        os.path.join("images", "grass_background.PNG")
     ).convert()
     bg_width, bg_height = background_image.get_size()
 

@@ -17,6 +17,7 @@ class Player(pygame.sprite.Sprite):
         self.movez = 0
         self.frame = 0
         self.images = []
+
         for i in range(1, 3):
             img = pygame.image.load(
                 os.path.join("images", "DragonFly" + str(i) + ".png")

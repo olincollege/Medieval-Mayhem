@@ -1,3 +1,7 @@
+"""
+This file contains code for the controller class
+"""
+
 import pygame
 import sys
 
