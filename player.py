@@ -1,18 +1,32 @@
 import pygame
-import sys
 import os
 
 
 class Player(pygame.sprite.Sprite):
     """
-    Spawn a player
+    A class to represent the player object.
+
+    Attributes:
+    player_list: A pygame Sprite group containing all the Player objects in the game.
+
+    Methods:
+    __init__(self):
+        Initialize a new instance of the Player object.
+    control(self, x, y, z):
+        Control the movement of the Player object.
+    update(self):
+        Update the position of the Player object based on its velocity.
+    update_image(self):
+        Update the image of the Player object.
+    check_bounds(self, player, worldx, worldy):
+        Check if the Player object is within the game bounds.
     """
 
     player_list = pygame.sprite.Group()
 
     def __init__(self):
         """
-        Initialize an instance of the dragon sprite
+        Initialize a new instance of the Player object.
         """
         pygame.sprite.Sprite.__init__(self)
         self.movex = 0
@@ -21,20 +35,35 @@ class Player(pygame.sprite.Sprite):
         self.frame = 0
         self.images = []
 
+        # Set dimensions for rectangle that detects collisions
+        rect_dimensions = 40
+
+        # Load and optimize player images
         for i in range(1, 3):
             img = pygame.image.load(
                 os.path.join("images", "DragonFly" + str(i) + ".png")
             ).convert()
-            img.convert_alpha()  # optimise alpha
-            # set alpha
+            img.convert_alpha()  # Optimize alpha
+            img.set_colorkey(img.get_at((0, 0)))  # Set alpha
             self.images.append(img)
             self.image = self.images[0]
             self.rect = self.image.get_rect()
+
+            # Change dimensions and position of collision detection rectangle
+            self.rect.w -= rect_dimensions
+            self.rect.h -= rect_dimensions
+            self.rect.x += rect_dimensions // 2
+            self.rect.y += rect_dimensions // 2
         self.current_image = 0
 
     def control(self, x, y, z):
         """
-        control player movement
+        Control the movement of the Player object.
+
+        Args:
+            x: An int representing the x-coordinate of the Player object.
+            y: An int representing the y-coordinate of the Player object.
+            z: An int representing the z-coordinate of the Player object.
         """
         self.movex += x
         self.movey += y
@@ -42,23 +71,26 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
         """
-        Update sprite position and image
+        Update the position of the Player object based on its velocity.
         """
         # Update sprite position
         self.rect.x = self.rect.x + self.movex
         self.rect.y = self.rect.y + self.movey
 
-        # moving up
+        # Moving up
         if self.movez < 0:
             self.rect.y -= abs(self.movez)
             self.movez = 0
 
-        # moving down
+        # Moving down
         if self.movez > 0:
             self.rect.y += abs(self.movez)
             self.movez = 0
 
     def update_image(self):
+        """
+        Update the image of the Player object.
+        """
         # Update sprite image
         self.current_image += 1
         if self.current_image >= len(self.images):
@@ -66,11 +98,26 @@ class Player(pygame.sprite.Sprite):
         self.image = self.images[self.current_image]
 
     def check_bounds(self, player, worldx, worldy):
+        """
+        Check if the Player object is within the game bounds.
+
+        Args:
+            player: A Player object representing the player sprite.
+            worldx: An int representing the width of the game world.
+            worldy: An int representing the height of the game world.
+        """
+        # Check if the left edge of the player sprite is out of bounds, and adjust it if necessary
         if player.rect.left < 0:
             player.rect.left = 0
+
+        # Check if the right edge of the player sprite is out of bounds, and adjust it if necessary
         elif player.rect.right > worldx:
             player.rect.right = worldx
+
+        # Check if the top edge of the player sprite is out of bounds, and adjust it if necessary
         if player.rect.top < 0:
             player.rect.top = 0
+
+        # Check if the bottom edge of the player sprite is out of bounds, and adjust it if necessary
         elif player.rect.bottom > worldy:
             player.rect.bottom = worldy
