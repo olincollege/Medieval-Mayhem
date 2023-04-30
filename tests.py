@@ -1,49 +1,53 @@
 import pygame
-import unittest
-from player import Player as Pl
-from obstacle import Castle as Co
-from background import Background as Bg
+import pytest
+from player import Player
+from obstacle import Castle
+from background import Background
 from controller import Controller
 from model import DragonModel
+
 
 pygame.init()
 
 
-class TestDragonGame(unittest.TestCase):
-    def test_player(self):
-        player = Pl()
-        player.rect.x = 100
-        player.rect.y = 200
-        self.assertEqual(player.rect.x, 100)
-        self.assertEqual(player.rect.y, 200)
-        player.update()
-        self.assertEqual(player.rect.y, 200)
 
-    def test_castle(self):
-        castle = Co(0, 0, 100, 100)
-        castle.add_obstacle(100, 100, Co.obstacle_list)
-        self.assertEqual(len(Co.obstacle_list), 1)
-        castle.update()
-        self.assertEqual(castle.rect.x, -10)
+def test_y_pos():
+    """
+    Test that the y position of the dragon sprite is constant after updating
+    the x position
+    """
+    player = Player()
+    player.rect.x = 100
+    player.rect.y = 200
+    assert player.rect.x == 100
+    assert player.rect.y == 200
+    player.update()
+    assert player.rect.y == 200
 
-    def test_controller(self):
-        controller = Controller()
-        player = Pl()
-        controller.controller(player, 0)
-        self.assertEqual(player.rect.y, 0)
-        controller.controller(player, -100)
-        self.assertEqual(player.rect.y, 0)
+def test_castle():
+    """
+    Test that the castles move 15 units to the left
+    """
+    castle = Castle(0, 0, 100, 100)
+    castle.add_obstacle(100, 100, Castle.obstacle_list)
+    assert len(Castle.obstacle_list) == 1
+    castle.update()
+    assert castle.rect.x == -10
 
-    def test_dragon_model(self):
-        dragon = DragonModel()
-        dragon.add_dragon()
-        self.assertEqual(len(Pl.player_list), 1)
-        dragon.collision()
-        self.assertEqual(dragon.score, 1)
-        dragon.player.rect.x = -10
-        dragon.update_dragon()
-        self.assertEqual(dragon.player.rect.x, 0)
+def test_controller():
+    controller = Controller()
+    player = Player()
+    controller.controller(player, 0)
+    assert player.rect.y == 0
+    controller.controller(player, -100)
+    assert player.rect.y == 0
 
-
-if __name__ == "__main__":
-    unittest.main()
+def test_dragon_model():
+    dragon = DragonModel()
+    dragon.add_dragon()
+    assert len(Player.player_list) == 1
+    dragon.collision()
+    assert dragon.score == 1
+    dragon.player.rect.x = -10
+    dragon.update_dragon()
+    assert dragon.player.rect.x == 0
