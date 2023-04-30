@@ -1,25 +1,16 @@
-import pygame
-import os
+"""
+File containing Player class
+"""
 
+import os
+import pygame
 
 class Player(pygame.sprite.Sprite):
     """
     A class to represent the player object.
 
     Attributes:
-    player_list: A pygame Sprite group containing all the Player objects in the game.
-
-    Methods:
-    __init__(self):
-        Initialize a new instance of the Player object.
-    control(self, x, y, z):
-        Control the movement of the Player object.
-    update(self):
-        Update the position of the Player object based on its velocity.
-    update_image(self):
-        Update the image of the Player object.
-    check_bounds(self, player, worldx, worldy):
-        Check if the Player object is within the game bounds.
+        player_list: A pygame Sprite group containing all the Player objects in the game
     """
 
     player_list = pygame.sprite.Group()
@@ -44,7 +35,8 @@ class Player(pygame.sprite.Sprite):
                 os.path.join("images", "DragonFly" + str(i) + ".png")
             ).convert()
             img.convert_alpha()  # Optimize alpha
-            img.set_colorkey(img.get_at((0, 0)))  # Set alpha
+            # Make the image background transparent
+            img.set_colorkey(img.get_at((0, 0)))
             self.images.append(img)
             self.image = self.images[0]
             self.rect = self.image.get_rect()
@@ -61,9 +53,9 @@ class Player(pygame.sprite.Sprite):
         Control the movement of the Player object.
 
         Args:
-            x: An int representing the x-coordinate of the Player object.
-            y: An int representing the y-coordinate of the Player object.
-            z: An int representing the z-coordinate of the Player object.
+            x: An int representing the x-coordinate of the Player object
+            y: An int representing the y-coordinate of the Player object
+            z: An int representing the z-coordinate of the Player object
         """
         self.movex += x
         self.movey += y
@@ -71,7 +63,7 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
         """
-        Update the position of the Player object based on its velocity.
+        Update the position of the Player object based on its velocity
         """
         # Update sprite position
         self.rect.x = self.rect.x + self.movex
@@ -89,7 +81,7 @@ class Player(pygame.sprite.Sprite):
 
     def update_image(self):
         """
-        Update the image of the Player object.
+        Update the image of the Player object
         """
         # Update sprite image
         self.current_image += 1
@@ -99,12 +91,12 @@ class Player(pygame.sprite.Sprite):
 
     def check_bounds(self, player, worldx, worldy):
         """
-        Check if the Player object is within the game bounds.
+        Check if the Player object is within the game bounds
 
         Args:
-            player: A Player object representing the player sprite.
-            worldx: An int representing the width of the game world.
-            worldy: An int representing the height of the game world.
+            player: A Player object representing the player sprite
+            worldx: An int representing the width of the game world
+            worldy: An int representing the height of the game world
         """
         # Check if the left edge of the player sprite is out of bounds, and adjust it if necessary
         if player.rect.left < 0:

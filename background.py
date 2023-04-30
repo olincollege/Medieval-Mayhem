@@ -1,3 +1,6 @@
+"""
+File containing Background class
+"""
 import os
 import pygame
 
@@ -24,11 +27,14 @@ class Background:
         bg_height: an int representing the height of the background image.
     """
 
-    # Class-level attributes for the display window and animation
-    frame_width = 1200  # Width of the display window
-    frame_height = 825  # Height of the display window
-    frames_per_second = 40  # Number of frames per second for the animation
-    ani = 10000  # Total time duration for the animation
+    # Width of display window
+    frame_width = 1200
+    # Height of display window
+    frame_height = 825
+    # Number of frames per second for animation
+    frames_per_second = 40
+    # Total animation frame duration
+    ani = 10000
 
     # Create a display window using Pygame
     world = pygame.display.set_mode([frame_width, frame_height])
