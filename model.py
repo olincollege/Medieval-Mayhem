@@ -53,23 +53,11 @@ class DragonModel:
         if self.position < -Background.bg_width:
             self.position = 0
 
-    # def add_dragon(self):
-    #     """
-    #     This method initializes the position of the dragon and adds
-    #     it to the player list
-    #     """
-    #     self.player.rect.x = 50
-    #     self.player.rect.y = 0
-    #     Player.player_list.add(self.player)
 
     def update_dragon(self):
         """
         This method moves the dragon when the up and down arrow keys are pressed
         """
-
-        # Create an instance of Controller
-        # control = Controller()
-        # control.controller(self.player, self.steps)
 
         # Check the bounds to make sure the dragon does not go off the screen
         self.player.check_bounds(
