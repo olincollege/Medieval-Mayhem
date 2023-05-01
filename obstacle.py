@@ -154,7 +154,7 @@ class Arrows(pygame.sprite.Sprite):
         """
         # Generate a random width and height for the Arrows object
         width = random.randint(200, 400)
-        height = random.randint(50, 250)
+        height = random.randint(15, 250)
 
         x = frame_width + width
         y = height
