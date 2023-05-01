@@ -13,7 +13,6 @@ class EndScreen:
     """
     Theis class details functions for the endscreen when a
     player hits an obstacle:
-
     Methods:
         __init__(self, width, height): Initalizes an endscreen object
         display(self): Displays Endscreen in game world and defines
@@ -23,7 +22,6 @@ class EndScreen:
     def __init__(self, width, height):
         """
         Initialize EndScreen object.
-
         Args:
             width: An int representing width of the game window
             height: An int representing height of the game window
@@ -50,7 +48,6 @@ class EndScreen:
         """
         Display the end screen until the user
         clicks the Exit button or closes the window.
-
         Returns:
             bool: True if the Exit button is clicked, False otherwise
         """
@@ -81,3 +78,4 @@ class EndScreen:
 
         # Quit pygame and exit the program when the done flag is set to True
         pygame.quit()
+        
