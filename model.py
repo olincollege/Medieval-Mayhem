@@ -17,20 +17,17 @@ class DragonModel:
     Attributes:
         steps: an integer representing how far up and down the dragon goes
         when the up/down keys are pressed
-        player: an instance of the Player class
         castle: an instance of the Castle class
         arrows: an instance of the Arrows class
         endscreen: an instance of the EndScreen class
     """
 
     steps = 10
-    # Spawn the dragon
-    player = Player()
     castle = Castle(0, 0, 100, 100)
     arrows = Arrows(0, 0)
     endscreen = EndScreen(Background.frame_width, Background.frame_height)
 
-    def __init__(self):
+    def __init__(self, player):
         """
         Initialize an instance of the DragonModel class
         """
@@ -40,8 +37,9 @@ class DragonModel:
         self.frame_count = 0
         self.arrows_frame_count = 0
         self.player_done = False
+        self.player = player
 
-    def background(self):
+    def update_background(self):
         """
         This method causes the background to scroll to the left by self.steps
         units
@@ -54,21 +52,15 @@ class DragonModel:
         # of the background width
         if self.position < -Background.bg_width:
             self.position = 0
-        
-        # Draw the background on the screen
-        Background.world.blit(Background.background_image, (self.position, 0))
-        Background.world.blit(
-            Background.background_image, (self.position + Background.bg_width, 0)
-        )
 
-    def add_dragon(self):
-        """
-        This method initializes the position of the dragon and adds
-        it to the player list
-        """
-        self.player.rect.x = 50
-        self.player.rect.y = 0
-        Player.player_list.add(self.player)
+    # def add_dragon(self):
+    #     """
+    #     This method initializes the position of the dragon and adds
+    #     it to the player list
+    #     """
+    #     self.player.rect.x = 50
+    #     self.player.rect.y = 0
+    #     Player.player_list.add(self.player)
 
     def update_dragon(self):
         """
@@ -76,17 +68,14 @@ class DragonModel:
         """
 
         # Create an instance of Controller
-        control = Controller()
-        control.controller(self.player, self.steps)
+        # control = Controller()
+        # control.controller(self.player, self.steps)
 
         # Check the bounds to make sure the dragon does not go off the screen
         self.player.check_bounds(
             self.player, Background.frame_width, Background.frame_height
         )
         self.player.update()
-
-        # Draw the dragon onto the screen
-        Player.player_list.draw(Background.world)
 
     def collision(self):
         """
@@ -113,11 +102,11 @@ class DragonModel:
             # Render the image to be a different type so it can be blitted on the screen
             score_image = font.render(f"Your Score: {self.score}", True, white)
             # Blit the image on the screen
-            Background.world.blit(score_image, (940, 10))
+            Background.world.blit(score_image, (920, 10))
             # Update the display
             pygame.display.update()
 
-    def add_castle(self):
+    def update_castle(self):
         """
         This method adds a castle every 90 frames
         """
@@ -134,9 +123,8 @@ class DragonModel:
             )
         # Update obstacle_list to add the new castle
         Castle.obstacle_list.update()
-        Castle.obstacle_list.draw(Background.world)
 
-    def add_arrows(self):
+    def update_arrows(self):
         """
         This method adds arrows every 80 frames
         """
@@ -152,11 +140,10 @@ class DragonModel:
             self.arrows.add_arrows(Background.frame_width, Arrows.arrows_list)
         # Update obstacle_list to add the new arrow obstacle
         Arrows.arrows_list.update()
-        Arrows.arrows_list.draw(Background.world)
 
     def end_screen(self):
         """
         This method draws the endscreen if the player has lost
         """
         if self.endscreen.display():
-            self.add_dragon()
+            Player()

@@ -59,6 +59,7 @@ class Castle(pygame.sprite.Sprite):
         # Set the speed of the castle
         self.velocity = 10
 
+
     def update(self):
         """
         Update the position of the castle by moving it to the left at its current velocity.

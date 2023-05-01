@@ -48,6 +48,11 @@ class Player(pygame.sprite.Sprite):
             self.rect.y += rect_dimensions // 2
         self.current_image = 0
 
+        # NEW STUFF
+        self.rect.x = 50
+        self.rect.y = 0
+        self.player_list.add(self)
+
     def control(self, x, y, z):
         """
         Control the movement of the Player object.
