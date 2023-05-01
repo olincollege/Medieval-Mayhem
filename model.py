@@ -4,9 +4,8 @@ File containing Model class
 import pygame
 from background import Background
 from obstacle import Castle
-from player import Player
-from controller import Controller
 from obstacle import Arrows
+from player import Player
 from endscreen import EndScreen
 
 
@@ -67,9 +66,9 @@ class DragonModel:
 
     def collision(self):
         """
-        This method checks to see if a collision has occurred by checking to see if
-        the dragon has collided with any of the obstacle sprite groups. If it hasn't,
-        the score is updated and drawn onto the screen
+        This method checks to see if a collision has occurred by checking to
+        see if the dragon has collided with any of the obstacle sprite groups.
+        If it hasn't, the score is updated and drawn onto the screen
 
         Returns:
             A Boolean representing whether there has been a collision or not
@@ -77,22 +76,25 @@ class DragonModel:
         # Check to see if a collision has occurred
         if pygame.sprite.spritecollide(
             self.player, Castle.obstacle_list, False
-        ) or pygame.sprite.spritecollide(self.player, Arrows.arrows_list, False):
+        ) or pygame.sprite.spritecollide(
+            self.player, Arrows.arrows_list, False
+            ):
             self.player_done = True
             return self.player_done
-        else:
-            # Increment the score by one
-            self.score += 1
-            # Set the font size
-            font = pygame.font.Font(None, 50)
-            # Set the font color
-            white = pygame.Color("white")
-            # Render the image to be a different type so it can be blitted on the screen
-            score_image = font.render(f"Your Score: {self.score}", True, white)
-            # Blit the image on the screen
-            Background.world.blit(score_image, (920, 10))
-            # Update the display
-            pygame.display.update()
+        # Increment the score by one if no collision has occurred
+        self.score += 1
+        # Set the font size
+        font = pygame.font.Font(None, 50)
+        # Set the font color
+        white = pygame.Color("white")
+        # Render the image to be a different type so
+        # it can be blitted on the screen
+        score_image = font.render(f"Your Score: {self.score}", True, white)
+        # Blit the image on the screen
+        Background.world.blit(score_image, (920, 10))
+        # Update the display
+        pygame.display.update()
+        return self.player_done
 
     def update_castle(self):
         """
@@ -107,7 +109,8 @@ class DragonModel:
 
             # Add the castle obstacle
             self.castle.add_obstacle(
-                Background.frame_width, Background.frame_height, Castle.obstacle_list
+                Background.frame_width, Background.frame_height,
+                Castle.obstacle_list
             )
         # Update obstacle_list to add the new castle
         Castle.obstacle_list.update()
