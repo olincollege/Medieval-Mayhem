@@ -140,3 +140,10 @@ class DragonModel:
         """
         if self.endscreen.display():
             Player()
+
+    @property
+    def get_score(self):
+        """
+        Method to return the final score
+        """
+        return self.score
