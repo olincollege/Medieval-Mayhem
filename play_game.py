@@ -8,7 +8,6 @@ from player import Player
 from controller import Controller
 from background import Background
 
-pygame.init()
 
 # Create an instance of the dragon
 dragon = Player()
@@ -41,5 +40,3 @@ while not model.player_done:
         model.end_screen()
     pygame.display.flip()
     model.clock.tick(Background.frames_per_second)
-pygame.quit()
-

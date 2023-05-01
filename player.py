@@ -10,7 +10,8 @@ class Player(pygame.sprite.Sprite):
     A class to represent the player object.
 
     Attributes:
-        player_list: A pygame Sprite group containing all the Player objects in the game
+        player_list: A pygame Sprite group containing all the
+        Player objects in the game
     """
 
     player_list = pygame.sprite.Group()
@@ -53,7 +54,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.y = 0
         self.player_list.add(self)
 
-    def control(self, x, y, z):
+    def control(self, x_position, y_position, z_position):
         """
         Control the movement of the Player object.
 
@@ -62,9 +63,9 @@ class Player(pygame.sprite.Sprite):
             y: An int representing the y-coordinate of the Player object
             z: An int representing the z-coordinate of the Player object
         """
-        self.movex += x
-        self.movey += y
-        self.movez += z
+        self.movex += x_position
+        self.movey += y_position
+        self.movez += z_position
 
     def update(self):
         """
@@ -103,18 +104,22 @@ class Player(pygame.sprite.Sprite):
             worldx: An int representing the width of the game world
             worldy: An int representing the height of the game world
         """
-        # Check if the left edge of the player sprite is out of bounds, and adjust it if necessary
+        # Check if the left edge of the player sprite is out of bounds,
+        # adjust it if necessary
         if player.rect.left < 0:
             player.rect.left = 0
 
-        # Check if the right edge of the player sprite is out of bounds, and adjust it if necessary
+        # Check if the right edge of the player sprite is out of bounds,
+        # adjust it if necessary
         elif player.rect.right > worldx:
             player.rect.right = worldx
 
-        # Check if the top edge of the player sprite is out of bounds, and adjust it if necessary
+        # Check if the top edge of the player sprite is out of bounds,
+        # adjust it if necessary
         if player.rect.top < 0:
             player.rect.top = 0
 
-        # Check if the bottom edge of the player sprite is out of bounds, and adjust it if necessary
+        # Check if the bottom edge of the player sprite is out of bounds,
+        # adjust it if necessary
         elif player.rect.bottom > worldy:
             player.rect.bottom = worldy

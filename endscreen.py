@@ -63,10 +63,10 @@ class EndScreen:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     # If the user clicks the mouse button
                     # get the position of the click
-                    x, y = event.pos
+                    x_position, y_position = event.pos
                     # If the position of the click is within the bounds of the
                     # Exit button, set done flag to True
-                    if self.button_rect.collidepoint(x, y):
+                    if self.button_rect.collidepoint(x_position, y_position):
                         self.done = True
                         return True
 

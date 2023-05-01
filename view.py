@@ -2,7 +2,6 @@
 File containing View class
 """
 
-import pygame
 from player import Player
 from obstacle import Castle
 from obstacle import Arrows
@@ -19,9 +18,9 @@ class View():
         Args:
             model: an instance of the DragonModel class
         """
-        pygame.init()
         self.model = model
-    
+
+
     def draw(self):
         """
         This method causes the background to scroll to the left by self.steps
@@ -29,9 +28,12 @@ class View():
         """
 
         # Draw the background on the screen
-        Background.world.blit(Background.background_image, (self.model.position, 0))
         Background.world.blit(
-            Background.background_image, (self.model.position + Background.bg_width, 0)
+            Background.background_image, (self.model.position, 0)
+            )
+        Background.world.blit(
+            Background.background_image,
+            (self.model.position + Background.bg_width, 0)
         )
 
         # Draw the dragon
@@ -43,5 +45,3 @@ class View():
 
         # Draw the arrows
         Arrows.arrows_list.draw(Background.world)
-
-    

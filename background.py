@@ -55,4 +55,3 @@ class Background:
         Constructor for the Background class.
 
         """
-        pass

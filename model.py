@@ -11,7 +11,9 @@ from endscreen import EndScreen
 
 class DragonModel:
     """
-    This is the model class for the dragon. It
+    This is the model class for the dragon. It keeps track of the state of
+    the arrows, the castle, the background, the dragon, the score, whether
+    there has been a collision, etc.
 
     Attributes:
         steps: an integer representing how far up and down the dragon goes
