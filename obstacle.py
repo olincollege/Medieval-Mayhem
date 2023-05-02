@@ -106,8 +106,8 @@ class Arrows(pygame.sprite.Sprite):
         Initialize a new Arrows object.
 
         Args:
-            x: An int representing the x-coordinate of the Arrows object
-            y: An int representing the y-coordinate of the Arrows object
+            x_position: An int representing the x-coordinate of the Arrows object
+            y_position: An int representing the y-coordinate of the Arrows object
         """
         super().__init__()
 
