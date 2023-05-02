@@ -13,6 +13,7 @@ class EndScreen:
     """
     Theis class details functions for the endscreen when a
     player hits an obstacle:
+
     Methods:
         __init__(self, width, height): Initalizes an endscreen object
         display(self): Displays Endscreen in game world and defines
@@ -22,6 +23,7 @@ class EndScreen:
     def __init__(self, width, height):
         """
         Initialize EndScreen object.
+
         Args:
             width: An int representing width of the game window
             height: An int representing height of the game window
@@ -32,9 +34,7 @@ class EndScreen:
         # Create font objects for end screen text and button text
         self.end_font = pygame.font.Font(None, 60)
         self.end_text = self.end_font.render("Game Over!", True, (255, 0, 0))
-        self.end_rect = self.end_text.get_rect(
-            center=(self.width / 2, self.height / 2)
-            )
+        self.end_rect = self.end_text.get_rect(center=(self.width / 2, self.height / 2))
         self.button_font = pygame.font.Font(None, 30)
         self.button_text = self.button_font.render("Exit", True, (0, 0, 0))
         self.button_rect = self.button_text.get_rect(
@@ -48,6 +48,7 @@ class EndScreen:
         """
         Display the end screen until the user
         clicks the Exit button or closes the window.
+
         Returns:
             bool: True if the Exit button is clicked, False otherwise
         """
@@ -78,4 +79,3 @@ class EndScreen:
 
         # Quit pygame and exit the program when the done flag is set to True
         pygame.quit()
-        

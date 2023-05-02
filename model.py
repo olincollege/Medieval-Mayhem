@@ -7,6 +7,7 @@ from obstacle import Castle
 from obstacle import Arrows
 from player import Player
 from endscreen import EndScreen
+from startscreen import StartScreen
 
 
 class DragonModel:
@@ -27,6 +28,7 @@ class DragonModel:
     castle = Castle(0, 0, 100, 100)
     arrows = Arrows(0, 0)
     endscreen = EndScreen(Background.frame_width, Background.frame_height)
+    startscreen = StartScreen(Background.frame_width, Background.frame_height)
 
     def __init__(self, player):
         """
@@ -54,7 +56,6 @@ class DragonModel:
         if self.position < -Background.bg_width:
             self.position = 0
 
-
     def update_dragon(self):
         """
         This method moves the dragon when the up and down arrow keys are pressed
@@ -78,9 +79,7 @@ class DragonModel:
         # Check to see if a collision has occurred
         if pygame.sprite.spritecollide(
             self.player, Castle.obstacle_list, False
-        ) or pygame.sprite.spritecollide(
-            self.player, Arrows.arrows_list, False
-            ):
+        ) or pygame.sprite.spritecollide(self.player, Arrows.arrows_list, False):
             self.player_done = True
             return self.player_done
         # Increment the score by one if no collision has occurred
@@ -111,8 +110,7 @@ class DragonModel:
 
             # Add the castle obstacle
             self.castle.add_obstacle(
-                Background.frame_width, Background.frame_height,
-                Castle.obstacle_list
+                Background.frame_width, Background.frame_height, Castle.obstacle_list
             )
         # Update obstacle_list to add the new castle
         Castle.obstacle_list.update()
@@ -133,6 +131,13 @@ class DragonModel:
             self.arrows.add_arrows(Background.frame_width, Arrows.arrows_list)
         # Update obstacle_list to add the new arrow obstacle
         Arrows.arrows_list.update()
+
+    def start_screen(self):
+        """
+        This method draws the startscreen if the player has lost
+        """
+        result = self.startscreen.display()
+        return result
 
     def end_screen(self):
         """
