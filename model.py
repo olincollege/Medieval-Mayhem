@@ -5,8 +5,6 @@ import pygame
 from background import Background
 from obstacle import Castle
 from obstacle import Arrows
-# from player import Player
-# from endscreen import EndScreen
 from startscreen import StartScreen
 
 
@@ -27,7 +25,6 @@ class DragonModel:
     steps = 10
     castle = Castle(0, 0, 100, 100)
     arrows = Arrows(0, 0)
-    # endscreen = EndScreen(Background.frame_width, Background.frame_height)
     startscreen = StartScreen(Background.frame_width, Background.frame_height)
 
     def __init__(self, player):
@@ -131,22 +128,6 @@ class DragonModel:
             self.arrows.add_arrows(Background.frame_width, Arrows.arrows_list)
         # Update obstacle_list to add the new arrow obstacle
         self.arrows.arrows_list.update()
-
-    # def start_screen(self):
-    #     """
-    #     This method draws the startscreen if the player has lost
-    #     """
-    #     result = self.startscreen.display()
-    #     return result
-
-    # def end_screen(self):
-    #     """
-    #     This method draws the endscreen if the player has lost
-    #     """
-    #     if self.endscreen.display() is True:
-    #         return True
-    #     if self.endscreen.display() is False:
-    #         return False
 
     @property
     def get_score(self):

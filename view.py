@@ -63,6 +63,10 @@ class View:
     def draw_end_screen(self):
         """
         This method draws the endscreen if the player has lost
+
+        Returns:
+            True or False depending on whether the player has clicked
+            the try again button
         """
         if self.end_screen.display() is True:
             return True
