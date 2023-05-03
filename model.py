@@ -132,12 +132,12 @@ class DragonModel:
         # Update obstacle_list to add the new arrow obstacle
         Arrows.arrows_list.update()
 
-    def start_screen(self):
-        """
-        This method draws the startscreen if the player has lost
-        """
-        result = self.startscreen.display()
-        return result
+    # def start_screen(self):
+    #     """
+    #     This method draws the startscreen if the player has lost
+    #     """
+    #     result = self.startscreen.display()
+    #     return result
 
     def end_screen(self):
         """

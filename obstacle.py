@@ -59,6 +59,7 @@ class Castle(pygame.sprite.Sprite):
 
         # Set the speed of the castle
         self.velocity = 10
+        self.height = 0
 
 
     def update(self):
@@ -81,10 +82,10 @@ class Castle(pygame.sprite.Sprite):
             of obstacles to which the new obstacle will be added
         """
         width = 200
-        height = random.randint(200, 500)
+        self.height = random.randint(200, 500)
         x_position = worldx + width
-        y_position = worldy - height
-        obstacle = Castle(x_position, y_position, width, height)
+        y_position = worldy - self.height
+        obstacle = Castle(x_position, y_position, width, self.height)
         obstacle_list.add(obstacle)
 
 
@@ -141,6 +142,7 @@ class Arrows(pygame.sprite.Sprite):
         self.rect.h -= rect_dimensions
         self.rect.x += rect_dimensions // 2
         self.rect.y += rect_dimensions // 2
+        self.height = 0
 
     def update(self):
         """
@@ -161,10 +163,10 @@ class Arrows(pygame.sprite.Sprite):
         """
         # Generate a random width and height for the Arrows object
         width = random.randint(200, 400)
-        height = random.randint(15, 250)
+        self.height = random.randint(15, 250)
 
         x_position = frame_width + width
-        y_position = height
+        y_position = self.height
 
         # Create a new Arrows object and add it to the arrows_list
         obstacle = Arrows(x_position, y_position)

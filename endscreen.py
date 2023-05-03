@@ -75,6 +75,7 @@ class EndScreen:
             Bg.world.blit(self.button_text, self.button_rect)
 
             # Update the display to show the changes
+
             pygame.display.flip()
 
         # Quit pygame and exit the program when the done flag is set to True

@@ -37,9 +37,9 @@ def test_castle():
 def test_controller():
     controller = Controller()
     player = Player()
-    controller.controller(player, 0)
+    controller.update(player, 0)
     assert player.rect.y == 0
-    controller.controller(player, -100)
+    controller.update(player, -100)
     assert player.rect.y == 0
 
 def test_dragon_model():

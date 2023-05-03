@@ -43,14 +43,6 @@ class Controller():
 
             # Handle keydown events
             if event.type == pygame.KEYDOWN:
-                # Handle the event when the user presses the 'q' key
-                if event.key == ord("q"):
-                    # Quit pygame and exit the program
-                    pygame.quit()
-                    try:
-                        sys.exit()
-                    finally:
-                        main = False
                 # Handle the event when the user presses
                 # the up arrow or the 'w' key
                 if event.key == pygame.K_UP or event.key == ord("w"):
