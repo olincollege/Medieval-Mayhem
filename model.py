@@ -31,10 +31,10 @@ class DragonModel:
         """
         Initialize an instance of the DragonModel class
         """
-        self.score = 0
+        self._score = 0
         self.position = 0
         self.clock = pygame.time.Clock()
-        self.frame_count = 0
+        self._frame_count = 0
         self.arrows_frame_count = 0
         self.player_done = False
         self.player = player
@@ -80,14 +80,14 @@ class DragonModel:
             self.player_done = True
             return self.player_done
         # Increment the score by one if no collision has occurred
-        self.score += 1
+        self._score += 1
         # Set the font size
         font = pygame.font.Font(None, 50)
         # Set the font color
         white = pygame.Color("white")
         # Render the image to be a different type so
         # it can be blitted on the screen
-        score_image = font.render(f"Your Score: {self.score}", True, white)
+        score_image = font.render(f"Your Score: {self._score}", True, white)
         # Blit the image on the screen
         Background.world.blit(score_image, (920, 10))
         # Update the display
@@ -99,11 +99,11 @@ class DragonModel:
         This method adds a castle every 90 frames
         """
         # Increase the frame count by one
-        self.frame_count += 1
+        self._frame_count += 1
 
         # If the frame count is 90, reset it to zero
-        if self.frame_count == 90:
-            self.frame_count = 0
+        if self._frame_count == 90:
+            self._frame_count = 0
 
             # Add the castle obstacle
             self.castle.add_obstacle(
@@ -134,4 +134,4 @@ class DragonModel:
         """
         Method to return the final score
         """
-        return self.score
+        return self._score
