@@ -28,7 +28,9 @@ def test_arrow_range(arrow):
     assert arrow.height >= 15 and arrow.height <= 250
 
 @pytest.mark.parametrize("arrow, velocity", [
-    (arrow, velocity) for arrow, velocity in zip(arrows_obstacle_list, velocity_list)
+    (arrow, velocity) for arrow, velocity in zip(
+arrows_obstacle_list, velocity_list
+)
 ])
 def test_arrow_position(arrow, velocity):
     """
@@ -53,7 +55,19 @@ def test_castle_height(castle):
     This tests that the height of the castle is within the range
     specified in the class
     """
-    castle.add_obstacle(Background.frame_width, Background.frame_height, Castle.obstacle_list)
+    castle.add_obstacle(
+    Background.frame_width, Background.frame_height, Castle.obstacle_list
+)
     assert castle.height >= 200 and castle.height <= 500
 
-
+@pytest.mark.parametrize("castle", castle_obstacle_list)
+def test_castle_position(castle):
+    """
+    The Castle class has a set velocity that determines how far left along
+    the screen the castles move. This method tests that all the castles
+    move as far as they are supposed to
+    """
+    castle_position = castle.rect.x
+    castle.update()
+    velocity = castle.velocity
+    assert castle.rect.x == castle_position - velocity
