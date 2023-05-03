@@ -113,7 +113,7 @@ class DragonModel:
                 Background.frame_width, Background.frame_height, Castle.obstacle_list
             )
         # Update obstacle_list to add the new castle
-        Castle.obstacle_list.update()
+        self.castle.obstacle_list.update()
 
     def update_arrows(self):
         """
@@ -130,7 +130,7 @@ class DragonModel:
             # Add the arrow obstacle
             self.arrows.add_arrows(Background.frame_width, Arrows.arrows_list)
         # Update obstacle_list to add the new arrow obstacle
-        Arrows.arrows_list.update()
+        self.arrows.arrows_list.update()
 
     # def start_screen(self):
     #     """
@@ -143,8 +143,10 @@ class DragonModel:
         """
         This method draws the endscreen if the player has lost
         """
-        if self.endscreen.display():
-            Player()
+        if self.endscreen.display() is True:
+            return True
+        if self.endscreen.display() is False:
+            return False
 
     @property
     def get_score(self):

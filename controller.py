@@ -6,8 +6,7 @@ import sys
 import pygame
 
 
-
-class Controller():
+class Controller:
     """
     A class that handles user input events and updates
     the state of the player object accordingly

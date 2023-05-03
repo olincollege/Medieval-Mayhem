@@ -5,19 +5,16 @@ File containing EndScreen class
 import pygame
 from background import Background as Bg
 
-
 pygame.font.init()
 
 
 class EndScreen:
     """
-    Theis class details functions for the endscreen when a
-    player hits an obstacle:
+    This class details functions for the endscreen when a player hits an obstacle:
 
     Methods:
-        __init__(self, width, height): Initalizes an endscreen object
-        display(self): Displays Endscreen in game world and defines
-        exit button
+        __init__(self, width, height): Initializes an endscreen object
+        display(self): Displays Endscreen in game world and defines exit and try again buttons
     """
 
     def __init__(self, width, height):
@@ -31,14 +28,21 @@ class EndScreen:
         self.width = width
         self.height = height
 
-        # Create font objects for end screen text and button text
+        # Create font objects for end screen text, exit button text, and try again button text
         self.end_font = pygame.font.Font(None, 60)
         self.end_text = self.end_font.render("Game Over!", True, (255, 0, 0))
         self.end_rect = self.end_text.get_rect(center=(self.width / 2, self.height / 2))
-        self.button_font = pygame.font.Font(None, 30)
-        self.button_text = self.button_font.render("Exit", True, (0, 0, 0))
-        self.button_rect = self.button_text.get_rect(
-            center=(self.width / 2, self.height / 2 + 100)
+        self.exit_button_font = pygame.font.Font(None, 30)
+        self.exit_button_text = self.exit_button_font.render("Exit", True, (0, 0, 0))
+        self.exit_button_rect = self.exit_button_text.get_rect(
+            center=(self.width / 2, self.height / 2 + 50)
+        )
+        self.try_again_button_font = pygame.font.Font(None, 30)
+        self.try_again_button_text = self.try_again_button_font.render(
+            "Try Again", True, (0, 0, 0)
+        )
+        self.try_again_button_rect = self.try_again_button_text.get_rect(
+            center=(self.width / 2, self.height / 2 + 300)
         )
 
         # Initialize done flag to False
@@ -46,8 +50,8 @@ class EndScreen:
 
     def display(self):
         """
-        Display the end screen until the user
-        clicks the Exit button or closes the window.
+        Display the end screen until the user clicks the Exit or Try Again buttons,
+        or closes the window.
 
         Returns:
             bool: True if the Exit button is clicked, False otherwise
@@ -64,19 +68,25 @@ class EndScreen:
                     x_position, y_position = event.pos
                     # If the position of the click is within the bounds of the
                     # Exit button, set done flag to True
-                    if self.button_rect.collidepoint(x_position, y_position):
+                    if self.exit_button_rect.collidepoint(x_position, y_position):
+                        print("exit")
                         self.done = True
                         return True
+                    # If the position of the click is within the bounds of the
+                    # Try Again button, set done flag to True
+                    if self.try_again_button_rect.collidepoint(x_position, y_position):
+                        print("try again")
+                        self.done = True
+                        return False
 
-            # Blit the end screen text, button background,
+            # Blit the end screen text, Exit button background, Try Again button background,
             # and button text onto the game window
             Bg.world.blit(self.end_text, self.end_rect)
-            pygame.draw.rect(Bg.world, (255, 255, 255), self.button_rect)
-            Bg.world.blit(self.button_text, self.button_rect)
+            pygame.draw.rect(Bg.world, (255, 255, 255), self.exit_button_rect)
+            Bg.world.blit(self.exit_button_text, self.exit_button_rect)
+            pygame.draw.rect(Bg.world, (255, 255, 255), self.try_again_button_rect)
+            Bg.world.blit(self.try_again_button_text, self.try_again_button_rect)
 
             # Update the display to show the changes
 
             pygame.display.flip()
-
-        # Quit pygame and exit the program when the done flag is set to True
-        pygame.quit()
