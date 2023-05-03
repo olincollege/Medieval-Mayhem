@@ -1,5 +1,8 @@
+import os
 import pygame
-from pygame.locals import *
+from pygame.locals import MOUSEBUTTONDOWN
+from pygame.locals import QUIT
+
 
 pygame.font.init()
 
@@ -19,7 +22,7 @@ class StartScreen:
 
     """
 
-    def __init__(self, width: int, height: int) -> None:
+    def __init__(self, width, height) -> None:
         """
         Initializes the StartScreen object.
 
@@ -30,13 +33,16 @@ class StartScreen:
         # Initialize the StartScreen object with the specified width and height.
         self.width = width
         self.height = height
+        self.img = pygame.image.load(
+            os.path.join("images", "start_screen.PNG")
+        ).convert()
+        self.img.convert_alpha()
         self.screen = pygame.display.set_mode((width, height))
         self.font = pygame.font.Font(None, 50)
-        self.title_text = self.font.render("Dragon Game", True, (255, 255, 255))
-        self.start_button_rect = pygame.Rect(200, 200, 200, 100)
+        self.start_button_rect = pygame.Rect(450, 200, 200, 100)
         self.start_button_text = self.font.render("Start", True, (0, 0, 0))
 
-    def display(self) -> str:
+    def display(self):
         """
         Displays the start screen and waits for the user to click the start button.
 
@@ -57,11 +63,10 @@ class StartScreen:
                         return "start"
 
             # Draw the start screen elements.
-            self.screen.fill((0, 0, 0))
-            self.screen.blit(
-                self.title_text, (self.width / 2 - self.title_text.get_width() / 2, 100)
+            self.screen.blit(self.img, (0, 0))
+            pygame.draw.rect(
+                self.screen, (255, 255, 255), self.start_button_rect
             )
-            pygame.draw.rect(self.screen, (255, 255, 255), self.start_button_rect)
             self.screen.blit(
                 self.start_button_text,
                 (
