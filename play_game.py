@@ -39,6 +39,6 @@ while not model.player_done:
 
         # Move to the endscreen if a collision has occurred
         if COLLISION:
-            model.end_screen()
+            view.draw_end_screen()
         pygame.display.flip()
         model.clock.tick(Background.frames_per_second)

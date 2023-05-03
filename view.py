@@ -7,6 +7,7 @@ from obstacle import Castle
 from obstacle import Arrows
 from background import Background
 from startscreen import StartScreen
+from endscreen import EndScreen
 
 
 class View:
@@ -22,6 +23,7 @@ class View:
             model: an instance of the DragonModel class
         """
         self.model = model
+        self.end_screen = EndScreen(Background.frame_width, Background.frame_height)
 
     def draw_start_screen(self):
         """
@@ -35,6 +37,7 @@ class View:
         start_screen = StartScreen(Background.frame_width, Background.frame_height)
         result = start_screen.display()
         return result
+
 
     def draw(self):
         """
@@ -56,3 +59,12 @@ class View:
 
         # Draw the arrows
         Arrows.arrows_list.draw(Background.world)
+    
+    def draw_end_screen(self):
+        """
+        This method draws the endscreen if the player has lost
+        """
+        if self.end_screen.display() is True:
+            return True
+        if self.end_screen.display() is False:
+            return False
