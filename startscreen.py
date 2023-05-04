@@ -39,8 +39,9 @@ class StartScreen:
         self.img.convert_alpha()
         self.screen = pygame.display.set_mode((width, height))
         self.font = pygame.font.Font(None, 50)
-        self.start_button_rect = pygame.Rect(450, 200, 200, 100)
+        self.start_button_rect = pygame.Rect(450, 200, 300, 125)
         self.start_button_text = self.font.render("Start", True, (0, 0, 0))
+        self.image =  pygame.transform.scale(self.img, (1200, 825))
 
     def display(self):
         """
@@ -63,7 +64,7 @@ class StartScreen:
                         return "start"
 
             # Draw the start screen elements.
-            self.screen.blit(self.img, (0, 0))
+            self.screen.blit(self.image, (0, 0))
             pygame.draw.rect(
                 self.screen, (255, 255, 255), self.start_button_rect
             )

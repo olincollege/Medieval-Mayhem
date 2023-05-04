@@ -37,13 +37,6 @@ class EndScreen:
         self.exit_button_rect = self.exit_button_text.get_rect(
             center=(self.width / 2, self.height / 2 + 50)
         )
-        self.try_again_button_font = pygame.font.Font(None, 30)
-        self.try_again_button_text = self.try_again_button_font.render(
-            "Try Again", True, (0, 0, 0)
-        )
-        self.try_again_button_rect = self.try_again_button_text.get_rect(
-            center=(self.width / 2, self.height / 2 + 300)
-        )
 
         # Initialize done flag to False
         self.done = False
@@ -72,20 +65,11 @@ class EndScreen:
                         print("exit")
                         self.done = True
                         return True
-                    # If the position of the click is within the bounds of the
-                    # Try Again button, set done flag to True
-                    if self.try_again_button_rect.collidepoint(x_position, y_position):
-                        print("try again")
-                        self.done = True
-                        return False
-
-            # Blit the end screen text, Exit button background, Try Again button background,
+            # Blit the end screen text, Exit button background
             # and button text onto the game window
             Bg.world.blit(self.end_text, self.end_rect)
             pygame.draw.rect(Bg.world, (255, 255, 255), self.exit_button_rect)
             Bg.world.blit(self.exit_button_text, self.exit_button_rect)
-            pygame.draw.rect(Bg.world, (255, 255, 255), self.try_again_button_rect)
-            Bg.world.blit(self.try_again_button_text, self.try_again_button_rect)
 
             # Update the display to show the changes
 
