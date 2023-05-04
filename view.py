@@ -23,7 +23,9 @@ class View:
             model: an instance of the DragonModel class
         """
         self.model = model
-        self.end_screen = EndScreen(Background.frame_width, Background.frame_height)
+        self.end_screen = EndScreen(
+            Background.frame_width, Background.frame_height
+        )
 
     def draw_start_screen(self):
         """
@@ -34,10 +36,11 @@ class View:
             A String "start" representing whether the user has clicked
             the start button or not
         """
-        start_screen = StartScreen(Background.frame_width, Background.frame_height)
+        start_screen = StartScreen(
+            Background.frame_width, Background.frame_height
+        )
         result = start_screen.display()
         return result
-
 
     def draw(self):
         """
@@ -46,9 +49,12 @@ class View:
         """
 
         # Draw the background on the screen
-        Background.world.blit(Background.background_image, (self.model.position, 0))
         Background.world.blit(
-            Background.background_image, (self.model.position + Background.bg_width, 0)
+            Background.background_image, (self.model.position, 0)
+        )
+        Background.world.blit(
+            Background.background_image,
+            (self.model.position + Background.bg_width, 0),
         )
 
         # Draw the dragon
@@ -59,16 +65,10 @@ class View:
 
         # Draw the arrows
         Arrows.arrows_list.draw(Background.world)
-    
+
     def draw_end_screen(self):
         """
         This method draws the endscreen if the player has lost
-
-        Returns:
-            True or False depending on whether the player has clicked
-            the try again button
         """
-        if self.end_screen.display() is True:
-            return True
-        if self.end_screen.display() is False:
-            return False
+
+        self.end_screen.display()

@@ -10,11 +10,13 @@ pygame.font.init()
 
 class EndScreen:
     """
-    This class details functions for the endscreen when a player hits an obstacle:
+    This class details functions for the endscreen when
+    a player hits an obstacle:
 
     Methods:
         __init__(self, width, height): Initializes an endscreen object
-        display(self): Displays Endscreen in game world and defines exit and try again buttons
+        display(self): Displays Endscreen in game world and
+        defines exit and try again buttons
     """
 
     def __init__(self, width, height):
@@ -28,12 +30,16 @@ class EndScreen:
         self.width = width
         self.height = height
 
-        # Create font objects for end screen text, exit button text, and try again button text
+        # Create font objects for end screen text and exit button text
         self.end_font = pygame.font.Font(None, 60)
         self.end_text = self.end_font.render("Game Over!", True, (255, 0, 0))
-        self.end_rect = self.end_text.get_rect(center=(self.width / 2, self.height / 2))
+        self.end_rect = self.end_text.get_rect(
+            center=(self.width / 2, self.height / 2)
+        )
         self.exit_button_font = pygame.font.Font(None, 30)
-        self.exit_button_text = self.exit_button_font.render("Exit", True, (0, 0, 0))
+        self.exit_button_text = self.exit_button_font.render(
+            "Exit", True, (0, 0, 0)
+        )
         self.exit_button_rect = self.exit_button_text.get_rect(
             center=(self.width / 2, self.height / 2 + 50)
         )
@@ -43,7 +49,7 @@ class EndScreen:
 
     def display(self):
         """
-        Display the end screen until the user clicks the Exit or Try Again buttons,
+        Display the end screen until the user clicks the Exit button
         or closes the window.
 
         Returns:
@@ -61,7 +67,9 @@ class EndScreen:
                     x_position, y_position = event.pos
                     # If the position of the click is within the bounds of the
                     # Exit button, set done flag to True
-                    if self.exit_button_rect.collidepoint(x_position, y_position):
+                    if self.exit_button_rect.collidepoint(
+                        x_position, y_position
+                    ):
                         print("exit")
                         self.done = True
                         return True

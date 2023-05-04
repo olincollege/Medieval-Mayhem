@@ -76,7 +76,9 @@ class DragonModel:
         # Check to see if a collision has occurred
         if pygame.sprite.spritecollide(
             self.player, Castle.obstacle_list, False
-        ) or pygame.sprite.spritecollide(self.player, Arrows.arrows_list, False):
+        ) or pygame.sprite.spritecollide(
+            self.player, Arrows.arrows_list, False
+        ):
             self.player_done = True
             return self.player_done
         # Increment the score by one if no collision has occurred
@@ -107,7 +109,9 @@ class DragonModel:
 
             # Add the castle obstacle
             self.castle.add_obstacle(
-                Background.frame_width, Background.frame_height, Castle.obstacle_list
+                Background.frame_width,
+                Background.frame_height,
+                Castle.obstacle_list,
             )
         # Update obstacle_list to add the new castle
         self.castle.obstacle_list.update()
