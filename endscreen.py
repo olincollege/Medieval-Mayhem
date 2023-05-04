@@ -11,17 +11,12 @@ pygame.font.init()
 class EndScreen:
     """
     This class details functions for the endscreen when
-    a player hits an obstacle:
-
-    Methods:
-        __init__(self, width, height): Initializes an endscreen object
-        display(self): Displays Endscreen in game world and
-        defines exit and try again buttons
+    a player hits an obstacle
     """
 
     def __init__(self, width, height):
         """
-        Initialize EndScreen object.
+        Initialize an instance of EndScreen object
 
         Args:
             width: An int representing width of the game window
@@ -32,6 +27,8 @@ class EndScreen:
 
         # Create font objects for end screen text and exit button text
         self.end_font = pygame.font.Font(None, 60)
+        # Render the text to be a different type so
+        # it can be blitted on the screen
         self.end_text = self.end_font.render("Game Over!", True, (255, 0, 0))
         self.end_rect = self.end_text.get_rect(
             center=(self.width / 2, self.height / 2)
@@ -40,6 +37,8 @@ class EndScreen:
         self.exit_button_text = self.exit_button_font.render(
             "Exit", True, (0, 0, 0)
         )
+        # Render the text to be a different type so
+        # it can be blitted on the screen
         self.exit_button_rect = self.exit_button_text.get_rect(
             center=(self.width / 2, self.height / 2 + 50)
         )
@@ -53,7 +52,7 @@ class EndScreen:
         or closes the window.
 
         Returns:
-            bool: True if the Exit button is clicked, False otherwise
+            True if the Exit button is clicked, False otherwise
         """
         while not self.done:
             for event in pygame.event.get():
@@ -70,7 +69,6 @@ class EndScreen:
                     if self.exit_button_rect.collidepoint(
                         x_position, y_position
                     ):
-                        print("exit")
                         self.done = True
                         return True
             # Blit the end screen text, Exit button background

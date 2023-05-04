@@ -1,7 +1,5 @@
 """
-This file contains classes for the obstacles in the game.
-The Castle and arrows obstacle classes are both in this
-file.
+This file contains the Castle class and the Arrows class
 """
 
 import random
@@ -11,7 +9,7 @@ import pygame
 
 class Castle(pygame.sprite.Sprite):
     """
-    Represents a castle obstacle in the game.
+    Represents a castle obstacle in the game
 
     Attributes:
         obstacle_list: A pygame Sprite group of all
@@ -22,11 +20,13 @@ class Castle(pygame.sprite.Sprite):
 
     def __init__(self, x_position, y_position, width, height):
         """
-        Create a new instance of the Castle object
+        Initialize a new instance of the Castle object
 
         Args:
-            x: An int representing the x-coordinate of the castle's position
-            y: An int representing the y-coordinate of the castle's position
+            x_position: An int representing the x-coordinate of the
+            castle's position
+            y_position: An int representing the y-coordinate of the
+            castle's position
             width: An int representing the width of the castle image
             height: An int represnting the height of the castle image
         """
@@ -59,24 +59,27 @@ class Castle(pygame.sprite.Sprite):
 
         # Set the speed of the castle
         self.velocity = 10
+
         self.height = 0
 
     def update(self):
         """
         Update the position of the castle by moving it to the
-        left at its current velocity.
+        left at its current velocity
         """
         self.rect.x -= self.velocity
 
     def add_obstacle(self, worldx, worldy, obstacle_list):
         """
-        Add a new castle obstacle to the given obstacle_list.
+        Add a new castle obstacle to the given obstacle_list
 
         Args:
             worldx: An int representing the x-coordinate of the world
             in which the obstacle will be placed
+
             worldy: An int representing the y-coordinate of the world
             in which the obstacle will be placed
+
             obstacle_list: A pygame sprite group representing the list
             of obstacles to which the new obstacle will be added
         """
@@ -103,7 +106,7 @@ class Arrows(pygame.sprite.Sprite):
 
     def __init__(self, x_position, y_position):
         """
-        Initialize a new Arrows object.
+        Initialize an instance of the Arrows object
 
         Args:
             x_position: An int representing the x-coordinate
@@ -155,7 +158,7 @@ class Arrows(pygame.sprite.Sprite):
 
     def add_arrows(self, frame_width, arrows_list):
         """
-        Create a new Arrows object and add it to the arrows_list.
+        Create a new Arrows object and add it to the arrows_list
 
         Args:
             frame_width: An int representing the width of the game frame

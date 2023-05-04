@@ -11,8 +11,8 @@ from startscreen import StartScreen
 class DragonModel:
     """
     This is the model class for the dragon. It keeps track of the state of
-    the arrows, the castle, the background, the dragon, the score, whether
-    there has been a collision, etc.
+    the arrows, the castle, the background, the dragon, the score, and whether
+    there has been a collision
 
     Attributes:
         steps: an integer representing how far up and down the dragon goes
@@ -30,6 +30,9 @@ class DragonModel:
     def __init__(self, player):
         """
         Initialize an instance of the DragonModel class
+
+        Args:
+            player: an instance of the Player class
         """
         self._score = 0
         self.position = 0
@@ -41,8 +44,8 @@ class DragonModel:
 
     def update_background(self):
         """
-        This method causes the background to scroll to the left by self.steps
-        units
+        This method causes the background to scroll to the left by
+        self.steps (10) units
         """
 
         # Move the position of the background self.steps units to the left
@@ -132,10 +135,3 @@ class DragonModel:
             self.arrows.add_arrows(Background.frame_width, Arrows.arrows_list)
         # Update obstacle_list to add the new arrow obstacle
         self.arrows.arrows_list.update()
-
-    @property
-    def get_score(self):
-        """
-        Method to return the final score
-        """
-        return self._score

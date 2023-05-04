@@ -5,9 +5,10 @@ File containing Player class
 import os
 import pygame
 
+
 class Player(pygame.sprite.Sprite):
     """
-    A class to represent the player object.
+    A class to represent the player object
 
     Attributes:
         player_list: A pygame Sprite group containing all the
@@ -18,7 +19,7 @@ class Player(pygame.sprite.Sprite):
 
     def __init__(self):
         """
-        Initialize a new instance of the Player object.
+        Initialize an instance of the Player object
         """
         pygame.sprite.Sprite.__init__(self)
         self.movex = 0
@@ -49,9 +50,6 @@ class Player(pygame.sprite.Sprite):
             self.rect.y += rect_dimensions // 2
         self.current_image = 0
 
-        # NEW STUFF
-        self.rect.x = 50
-        self.rect.y = 0
         self.player_list.add(self)
 
     def control(self, x_position, y_position, z_position):
@@ -59,9 +57,9 @@ class Player(pygame.sprite.Sprite):
         Control the movement of the Player object.
 
         Args:
-            x: An int representing the x-coordinate of the Player object
-            y: An int representing the y-coordinate of the Player object
-            z: An int representing the z-coordinate of the Player object
+            x_position: An int representing the x-coordinate of the Player object
+            y_position: An int representing the y-coordinate of the Player object
+            z_position: An int representing the z-coordinate of the Player object
         """
         self.movex += x_position
         self.movey += y_position
@@ -100,7 +98,7 @@ class Player(pygame.sprite.Sprite):
         Check if the Player object is within the game bounds
 
         Args:
-            player: A Player object representing the player sprite
+            player: an instance of Player
             worldx: An int representing the width of the game world
             worldy: An int representing the height of the game world
         """

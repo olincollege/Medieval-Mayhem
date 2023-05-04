@@ -9,14 +9,21 @@ import pygame
 class Controller:
     """
     A class that handles user input events and updates
-    the state of the player object accordingly
+    the state of the player object accordingly by calling
+    methods in the Player class that cause the player
+    to move up or down
     """
 
     def __init__(self, model):
         """
-        Initializes an instance of the Controller class.
+        Initializes an instance of the Controller class
+
+        Args:
+            model: an instance of the DragonModel class
         """
         self.player = model.player
+
+        # Define how many units up and down the sprite moves
         self.steps = 10
         self.main = None
 

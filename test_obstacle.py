@@ -14,6 +14,7 @@ for i in range(0, 100):
     arrows_obstacle_list.append(Arrows(0, 0))
     velocity_list.append(random.randint(10, 50))
 
+
 @pytest.mark.parametrize("arrow", arrows_obstacle_list)
 def test_arrow_range(arrow):
     """
@@ -27,11 +28,14 @@ def test_arrow_range(arrow):
     arrow.add_arrows(Background.frame_width, Arrows.arrows_list)
     assert arrow.height >= 15 and arrow.height <= 250
 
-@pytest.mark.parametrize("arrow, velocity", [
-    (arrow, velocity) for arrow, velocity in zip(
-arrows_obstacle_list, velocity_list
+
+@pytest.mark.parametrize(
+    "arrow, velocity",
+    [
+        (arrow, velocity)
+        for arrow, velocity in zip(arrows_obstacle_list, velocity_list)
+    ],
 )
-])
 def test_arrow_position(arrow, velocity):
     """
     The position of the arrows is moved to the left by whatever number
@@ -48,6 +52,7 @@ castle_obstacle_list = []
 for i in range(0, 100):
     castle_obstacle_list.append(Castle(0, 0, 100, 100))
 
+
 @pytest.mark.parametrize("castle", castle_obstacle_list)
 def test_castle_height(castle):
     """
@@ -56,9 +61,10 @@ def test_castle_height(castle):
     specified in the class
     """
     castle.add_obstacle(
-    Background.frame_width, Background.frame_height, Castle.obstacle_list
-)
+        Background.frame_width, Background.frame_height, Castle.obstacle_list
+    )
     assert castle.height >= 200 and castle.height <= 500
+
 
 @pytest.mark.parametrize("castle", castle_obstacle_list)
 def test_castle_position(castle):
