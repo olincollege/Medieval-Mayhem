@@ -10,7 +10,7 @@ controlled using the 'w' and 's' keys. The goal of the game is
 to get as high of a score as possible.
 
 ## Installation Instructions
-In order to play the game, install the pygame library. After that,
+In order to play the game, run pip install -r requirements.txt. After that,
 clone this repository, run the play_game.py file and enjoy!
 
 Good luck!
