@@ -61,7 +61,6 @@ class Castle(pygame.sprite.Sprite):
         self.velocity = 10
         self.height = 0
 
-
     def update(self):
         """
         Update the position of the castle by moving it to the
@@ -107,8 +106,10 @@ class Arrows(pygame.sprite.Sprite):
         Initialize a new Arrows object.
 
         Args:
-            x_position: An int representing the x-coordinate of the Arrows object
-            y_position: An int representing the y-coordinate of the Arrows object
+            x_position: An int representing the x-coordinate
+            of the Arrows object
+            y_position: An int representing the y-coordinate
+            of the Arrows object
         """
         super().__init__()
 
@@ -119,13 +120,13 @@ class Arrows(pygame.sprite.Sprite):
         # Load the image
         self.image = pygame.image.load(
             os.path.join("images", "arrows.png")
-            ).convert()
+        ).convert()
         # Make the image background transparent
         self.image.set_colorkey(self.image.get_at((0, 0)))
 
         self.image = pygame.transform.scale(
             self.image, (image_width, image_height)
-            )
+        )
         # Set dimensions for rectangle that detects collisions
         rect_dimensions = 60
 

@@ -1,3 +1,7 @@
+"""
+File containing StartScreen class
+"""
+
 import os
 import pygame
 from pygame.locals import MOUSEBUTTONDOWN
@@ -17,8 +21,10 @@ class StartScreen:
     - screen: The Pygame surface object representing the screen.
     - font: The Pygame font object used for rendering text.
     - title_text: The Pygame surface object representing the title text.
-    - start_button_rect: The Pygame rect object representing the start button.
-    - start_button_text: The Pygame surface object representing the start button text.
+    - start_button_rect: The Pygame rect object representing the
+    start button.
+    - start_button_text: The Pygame surface object representing
+    the start button text.
 
     """
 
@@ -41,11 +47,12 @@ class StartScreen:
         self.font = pygame.font.Font(None, 50)
         self.start_button_rect = pygame.Rect(450, 200, 300, 125)
         self.start_button_text = self.font.render("Start", True, (0, 0, 0))
-        self.image =  pygame.transform.scale(self.img, (1200, 825))
+        self.image = pygame.transform.scale(self.img, (1200, 825))
 
     def display(self):
         """
-        Displays the start screen and waits for the user to click the start button.
+        Displays the start screen and waits for
+        the user to click the start button.
 
         Returns:
         - str: The string "start".
@@ -56,8 +63,8 @@ class StartScreen:
                 if event.type == QUIT:
                     # Quit the game if the user clicks the close button.
                     pygame.quit()
-                    return
-                elif event.type == MOUSEBUTTONDOWN:
+                    return None
+                if event.type == MOUSEBUTTONDOWN:
                     mouse_pos = pygame.mouse.get_pos()
                     # If the user clicks the start button, return "start".
                     if self.start_button_rect.collidepoint(mouse_pos):

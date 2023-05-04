@@ -18,6 +18,7 @@ class Controller:
         """
         self.player = model.player
         self.steps = 10
+        self.main = None
 
     def update(self):
         """
@@ -38,7 +39,7 @@ class Controller:
                 try:
                     sys.exit()
                 finally:
-                    main = False
+                    self.main = False
 
             # Handle keydown events
             if event.type == pygame.KEYDOWN:
